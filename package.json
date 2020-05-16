@@ -1,0 +1,36 @@
+{
+  "name": "the_ui_color",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "start": "react-native start",
+    "dev": "adb reverse tcp:8081 tcp:8081 && yarn start"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.9.0",
+    "@react-native-community/masked-view": "^0.1.7",
+    "core-js": "^3.6.5",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-reanimated": "^1.8.0",
+    "react-native-safe-area-context": "^0.7.3",
+    "react-native-screens": "^2.4.0",
+    "react-native-vector-icons": "^6.6.0",
+    "react-navigation": "^3.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-test-renderer": "16.11.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
