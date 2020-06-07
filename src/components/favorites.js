@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,13 +8,13 @@ import {
   ScrollView,
   ToastAndroid,
   Image,
-  View
-} from "react-native";
-import { withNavigation } from "react-navigation";
-import { colorObject } from "../constants/index";
-import Icon from "react-native-vector-icons/dist/AntDesign";
-import AsyncStorage from "@react-native-community/async-storage";
-import NoFavColor from "../assets/noImg.gif";
+  View,
+} from 'react-native';
+import {withNavigation} from 'react-navigation';
+import {colorObject} from '../constants/index';
+import Icon from 'react-native-vector-icons/dist/AntDesign';
+import AsyncStorage from '@react-native-community/async-storage';
+import NoFavColor from '../assets/noImg.gif';
 
 class ColorPalettes extends Component {
   render() {
@@ -22,15 +22,14 @@ class ColorPalettes extends Component {
       <View>
         <View style={styles.main}>
           <View style={styles.colorName}>
-            <View style={{ justifyContent: "flex-start" }}>
+            <View style={{justifyContent: 'flex-start'}}>
               <Text style={styles.name}>{this.props.colorDetails.name}</Text>
             </View>
-            <View style={{ justifyContent: "flex-end" }}>
+            <View style={{justifyContent: 'flex-end'}}>
               <TouchableOpacity
                 onPress={() =>
                   this.props.removeColor(this.props.colorDetails.id)
-                }
-              >
+                }>
                 <Icon name="heart" size={20} color="red" />
               </TouchableOpacity>
             </View>
@@ -40,42 +39,41 @@ class ColorPalettes extends Component {
             activeOpacity={0.7}
             style={styles.colorBox}
             onPress={() =>
-              this.props.navi.navigate("ColorDetails", {
-                colorDetails: this.props.colorDetails
+              this.props.navi.navigate('ColorDetails', {
+                colorDetails: this.props.colorDetails,
               })
-            }
-          >
+            }>
             <View
               style={{
-                width: "25%",
+                width: '25%',
                 backgroundColor: this.props.colorDetails.color1,
                 paddingVertical: 40,
-                borderBottomLeftRadius: 10
+                borderBottomLeftRadius: 10,
               }}
             />
 
             <View
               style={{
-                width: "25%",
+                width: '25%',
                 paddingVertical: 40,
-                backgroundColor: this.props.colorDetails.color2
+                backgroundColor: this.props.colorDetails.color2,
               }}
             />
 
             <View
               style={{
-                width: "25%",
+                width: '25%',
                 paddingVertical: 40,
-                backgroundColor: this.props.colorDetails.color3
+                backgroundColor: this.props.colorDetails.color3,
               }}
             />
 
             <View
               style={{
-                width: "25%",
+                width: '25%',
                 paddingVertical: 40,
                 backgroundColor: this.props.colorDetails.color4,
-                borderBottomRightRadius: 10
+                borderBottomRightRadius: 10,
               }}
             />
           </TouchableOpacity>
@@ -93,11 +91,11 @@ class Favorites extends Component {
     this.state = {
       favColorIds: [],
       colors: null,
-      loader: true
+      loader: true,
     };
 
-    const { navigation } = this.props;
-    this.focusListener = navigation.addListener("didFocus", () => {
+    const {navigation} = this.props;
+    this.focusListener = navigation.addListener('didFocus', () => {
       this.getFavColors();
     });
   }
@@ -109,10 +107,10 @@ class Favorites extends Component {
   saveInAsyncStorage = async () => {
     try {
       colors = this.state.favColorIds;
-      await AsyncStorage.setItem("colors", JSON.stringify(colors));
-      ToastAndroid.show("Done", ToastAndroid.SHORT);
+      await AsyncStorage.setItem('colors', JSON.stringify(colors));
+      ToastAndroid.show('Done', ToastAndroid.SHORT);
     } catch (e) {
-      ToastAndroid.show("Please try again", ToastAndroid.SHORT);
+      ToastAndroid.show('Please try again', ToastAndroid.SHORT);
     }
   };
 
@@ -120,7 +118,7 @@ class Favorites extends Component {
     filteredArr = this.state.favColorIds.filter(colorId => {
       return colorId != id;
     });
-    this.setState({ favColorIds: filteredArr }, () => {
+    this.setState({favColorIds: filteredArr}, () => {
       this.saveInAsyncStorage();
       this.getFavColors();
     });
@@ -128,7 +126,7 @@ class Favorites extends Component {
 
   getFavColors = async () => {
     try {
-      const favColors = await AsyncStorage.getItem("colors");
+      const favColors = await AsyncStorage.getItem('colors');
 
       if (favColors !== null) {
         filteredColors = [];
@@ -142,44 +140,34 @@ class Favorites extends Component {
 
         this.setState({
           colors: filteredColors,
-          loader: false,
-          favColorIds: JSON.parse(favColors)
+          favColorIds: JSON.parse(favColors),
         });
       }
+      this.setState({loader: false});
     } catch (error) {
       console.log(error);
       ToastAndroid.show(
-        "Something went wrong while getting favorites",
-        ToastAndroid.SHORT
+        'Something went wrong while getting favorites',
+        ToastAndroid.SHORT,
       );
     }
   };
   render() {
-    const { loader, colors } = this.state;
+    const {loader, colors} = this.state;
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <ScrollView style={styles.mainBG}>
           <StatusBar hidden={true} />
           {loader ? (
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <ActivityIndicator size="large" color="tomato" />
-            </View>
-          ) : colors.length === 0 ? (
             <View
               style={{
-                flex: 1,
-                marginVertical: "50%",
-                alignSelf: "center"
-              }}
-            >
-              <Image
-                source={NoFavColor}
-                style={{ height: 200, width: 200 }}
-                resizeMode="contain"
-              />
-              <Text style={{ textAlign: "center" }}>No Favorites</Text>
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignSelf: 'center',
+              }}>
+              <ActivityIndicator size="large" color="tomato" />
             </View>
-          ) : (
+          ) : colors && colors.length !== 0 ? (
             colors.map(item => {
               return (
                 <Color
@@ -190,6 +178,20 @@ class Favorites extends Component {
                 />
               );
             })
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                marginVertical: '50%',
+                alignSelf: 'center',
+              }}>
+              <Image
+                source={NoFavColor}
+                style={{height: 200, width: 200}}
+                resizeMode="contain"
+              />
+              <Text style={{textAlign: 'center'}}>No Favorites</Text>
+            </View>
           )}
         </ScrollView>
       </View>
@@ -199,29 +201,29 @@ class Favorites extends Component {
 
 const styles = StyleSheet.create({
   mainBG: {
-    backgroundColor: "#dcdde1"
+    backgroundColor: '#dcdde1',
   },
 
   main: {
     margin: 10,
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: "white",
-    elevation: 10
+    backgroundColor: 'white',
+    elevation: 10,
   },
 
   colorName: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingVertical: 10,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   name: {
-    fontWeight: "bold"
+    fontWeight: 'bold',
   },
   colorBox: {
-    flexDirection: "row"
-  }
+    flexDirection: 'row',
+  },
 });
 
 export default withNavigation(Favorites);
