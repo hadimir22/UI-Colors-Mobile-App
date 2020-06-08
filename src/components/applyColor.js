@@ -31,26 +31,22 @@ class ApplyColor extends Component {
               paddingHorizontal: 50,
             },
           ]}>
-          <Text style={{color: 'white', fontSize: 20}}>
-            View or Div with {item} color
-          </Text>
+          <Text style={styles.fontStyle}>View or Div with {item} color</Text>
         </View>
 
         <View style={[styles.background, {borderColor: item, borderWidth: 1}]}>
-          <Text style={{color: item, fontSize: 20}}>
-            Border with {item} color
-          </Text>
+          <Text style={styles.fontStyle}>Border with {item} color</Text>
         </View>
 
         <View>
-          <Text style={{color: item, fontSize: 20, paddingBottom: 10}}>
+          <Text style={[styles.fontStyle, {paddingBottom: 10}]}>
             Loader with {item} color
           </Text>
           <ActivityIndicator size="large" color={item} />
         </View>
 
         <View>
-          <Text style={{color: item, fontSize: 20, paddingBottom: 10}}>
+          <Text style={[styles.fontStyle, {paddingBottom: 10}]}>
             Icons with {item} color
           </Text>
           <View style={styles.iconStyle}>
@@ -62,7 +58,7 @@ class ApplyColor extends Component {
         </View>
 
         <View style={[{backgroundColor: item, borderRadius: 15, padding: 15}]}>
-          <Text style={{color: 'white', fontSize: 20}}>Button</Text>
+          <Text style={styles.fontStyle}>Button</Text>
         </View>
       </View>
     );
@@ -88,6 +84,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  fontStyle: {
+    color: 'white',
+    fontSize: 20,
   },
 });
 
