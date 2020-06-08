@@ -159,12 +159,7 @@ class Favorites extends Component {
         <ScrollView style={styles.mainBG}>
           <StatusBar hidden={true} />
           {loader ? (
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'center',
-              }}>
+            <View style={styles.center}>
               <ActivityIndicator size="large" color="tomato" />
             </View>
           ) : colors && colors.length !== 0 ? (
@@ -203,7 +198,11 @@ const styles = StyleSheet.create({
   mainBG: {
     backgroundColor: '#dcdde1',
   },
-
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
   main: {
     margin: 10,
     borderWidth: 1,
