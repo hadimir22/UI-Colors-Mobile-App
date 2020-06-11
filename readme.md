@@ -13,3 +13,7 @@
 2.  npm i
 
 3.  react-native run-android
+
+### **Play Store link**
+
+> https://play.google.com/store/apps/details?id=com.the_ui_color
