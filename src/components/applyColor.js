@@ -35,11 +35,13 @@ class ApplyColor extends Component {
         </View>
 
         <View style={[styles.background, {borderColor: item, borderWidth: 1}]}>
-          <Text style={styles.fontStyle}>Border with {item} color</Text>
+          <Text style={[styles.fontStyle, {color: item}]}>
+            Border with {item} color
+          </Text>
         </View>
 
         <View>
-          <Text style={[styles.fontStyle, {paddingBottom: 10}]}>
+          <Text style={[styles.fontStyle, {paddingBottom: 10, color: item}]}>
             Loader with {item} color
           </Text>
           <ActivityIndicator size="large" color={item} />
